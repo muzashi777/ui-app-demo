@@ -39,13 +39,7 @@ jobs:
             echo "image_tag=uat-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
             echo "repo=muzashi777/k8s-calculator-nonprd" >> $GITHUB_OUTPUT
             echo "path_repo=k8s-calculator-nonprd" >> $GITHUB_OUTPUT
-          elif [[ $GITHUB_EVENT_NAME == "push" && $GITHUB_REF == "refs/tags/"* ]]; then
-            echo "image_tag=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
-            echo "ref_tag=uat-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
-            echo "env=prd" >> $GITHUB_OUTPUT
-            echo "repo=muzashi777/k8s-calculator-prd" >> $GITHUB_OUTPUT
-            echo "path_repo=k8s-calculator-prd" >> $GITHUB_OUTPUT
-          else
+          else if [[ $GITHUB_REF == "refs/heads/develop" ]]; then
             echo "image_tag=dev-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
             echo "env=dev" >> $GITHUB_OUTPUT
             echo "repo=muzashi777/k8s-calculator-nonprod" >> $GITHUB_OUTPUT
@@ -115,7 +109,7 @@ jobs:
         working-directory: ${{ needs.build.outputs.path_repo }}
         run: |-
           git config --global user.email "support@dependabot.com"
-          git config --global user.name "dependabot[bot]"
+          git config --global user.name "iamdevops"
           git add .
           git commit -am "release: ${{ env.IMAGE_NAME }} env: ${{ needs.build.outputs.env }} version: ${{ needs.build.outputs.image_tag }}"
           git push origin main
