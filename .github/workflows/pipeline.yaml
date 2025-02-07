@@ -37,7 +37,7 @@ jobs:
           if [[ $GITHUB_REF == "refs/heads/main" ]]; then
             echo "env=uat" >> $GITHUB_OUTPUT
             echo "image_tag=uat-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
-            echo "repo=muzashi777/k8s-calculator-nonprd" >> $GITHUB_OUTPUT
+            echo "repo=muzashi777/k8s-calculator-nonprod" >> $GITHUB_OUTPUT
             echo "path_repo=k8s-calculator-nonprd" >> $GITHUB_OUTPUT
           elif [[ $GITHUB_REF == "refs/heads/develop" ]]; then
             echo "image_tag=dev-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
