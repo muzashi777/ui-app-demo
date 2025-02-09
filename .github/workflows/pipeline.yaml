@@ -6,7 +6,8 @@ on:
     branches:
       - main
       - develop
-      - 'refs/tags/*'
+    tags:
+      - '*'
 
 env:
   IMAGE_NAME: mo-ui
